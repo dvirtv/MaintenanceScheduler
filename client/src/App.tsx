@@ -16,18 +16,33 @@ import Reports from "@/pages/reports";
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={Dashboard} />
-      {/* דרכים סטטיות ראשונות */}
-      <Route path="/equipment/new" component={Equipment} />
-      <Route path="/schedule" component={Schedule} />
-      <Route path="/work-orders" component={WorkOrders} />
-      <Route path="/staff" component={Staff} />
-      <Route path="/reports" component={Reports} />
-      <Route path="/equipment" component={Equipment} />
-      
-      {/* דרכים עם פרמטרים אחרונות */}
-      <Route path="/equipment/:id" component={EquipmentDetails} />
-      <Route component={NotFound} />
+      <Route path="/schedule">
+        <Schedule />
+      </Route>
+      <Route path="/work-orders">
+        <WorkOrders />
+      </Route>
+      <Route path="/staff">
+        <Staff />
+      </Route>
+      <Route path="/reports">
+        <Reports />
+      </Route>
+      <Route path="/equipment/new">
+        <Equipment />
+      </Route>
+      <Route path="/equipment/:id">
+        <EquipmentDetails />
+      </Route>
+      <Route path="/equipment">
+        <Equipment />
+      </Route>
+      <Route path="/">
+        <Dashboard />
+      </Route>
+      <Route>
+        <NotFound />
+      </Route>
     </Switch>
   );
 }

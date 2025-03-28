@@ -168,7 +168,7 @@ const MaintenanceCalendar: React.FC<MaintenanceCalendarProps> = ({
           previous: 'הקודם',
           next: 'הבא',
           noEventsInRange: 'אין משימות תחזוקה מתוזמנות בטווח זה',
-          showMore: (total) => `+ עוד ${total}`,
+          showMore: (total: number) => `+ עוד ${total}`,
         }}
       />
       
