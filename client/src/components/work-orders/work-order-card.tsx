@@ -26,9 +26,9 @@ interface WorkOrderCardProps {
     status: string;
     assignedTo?: number;
     assignedToName?: string;
-    createdAt: string;
-    scheduledFor?: string;
-    completedAt?: string;
+    createdDate: string;
+    dueDate?: string;
+    completionDate?: string;
     notes?: string;
   };
   compact?: boolean;
@@ -40,7 +40,7 @@ const WorkOrderCard: React.FC<WorkOrderCardProps> = ({
 }) => {
   const isCompleted = workOrder.status === "הושלמה" || workOrder.status === "בוטלה";
   const today = new Date();
-  const scheduledDate = workOrder.scheduledFor ? new Date(workOrder.scheduledFor) : null;
+  const scheduledDate = workOrder.dueDate ? new Date(workOrder.dueDate) : null;
   const isOverdue = scheduledDate && !isCompleted && scheduledDate < today;
 
   const truncateText = (text: string, maxLength: number) => {
@@ -86,14 +86,14 @@ const WorkOrderCard: React.FC<WorkOrderCardProps> = ({
         <div className={`flex ${compact ? 'justify-between mt-2' : 'justify-between mt-3'} text-xs text-neutral-dark`}>
           <div className="flex items-center">
             <Clock size={14} className="ml-1" />
-            <span>נפתח: {formatDate(workOrder.createdAt)}</span>
+            <span>נפתח: {formatDate(workOrder.createdDate)}</span>
           </div>
           
-          {workOrder.scheduledFor && (
+          {workOrder.dueDate && (
             <div className={`flex items-center ${isOverdue ? 'text-danger font-medium' : ''}`}>
               {isOverdue && <AlertCircle size={14} className="ml-1" />}
               {!isOverdue && <Calendar size={14} className="ml-1" />}
-              <span>מתוזמן: {formatDate(workOrder.scheduledFor)}</span>
+              <span>מתוזמן: {formatDate(workOrder.dueDate)}</span>
             </div>
           )}
         </div>

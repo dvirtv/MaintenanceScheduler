@@ -26,6 +26,8 @@ const WorkOrdersPage = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [showAddDialog, setShowAddDialog] = useState(false);
+  const [selectedWorkOrder, setSelectedWorkOrder] = useState<any>(null);
+  const [showEditDialog, setShowEditDialog] = useState(false);
   const [statusFilter, setStatusFilter] = useState<string | null>(null);
   const [priorityFilter, setPriorityFilter] = useState<string | null>(null);
 
@@ -240,7 +242,9 @@ const WorkOrdersPage = () => {
               <div className="space-y-3">
                 {openOrders.length > 0 ? (
                   openOrders.map(order => (
-                    <WorkOrderCard key={order.id} workOrder={order} />
+                    <div key={order.id} onClick={() => { setSelectedWorkOrder(order); setShowEditDialog(true); }}>
+                      <WorkOrderCard workOrder={order} />
+                    </div>
                   ))
                 ) : (
                   <div className="bg-white p-4 rounded-lg border border-neutral-medium text-center">
@@ -260,10 +264,14 @@ const WorkOrdersPage = () => {
                 {inProgressOrders.length > 0 || waitingForPartsOrders.length > 0 ? (
                   <>
                     {inProgressOrders.map(order => (
-                      <WorkOrderCard key={order.id} workOrder={order} />
+                      <div key={order.id} onClick={() => { setSelectedWorkOrder(order); setShowEditDialog(true); }}>
+                        <WorkOrderCard workOrder={order} />
+                      </div>
                     ))}
                     {waitingForPartsOrders.map(order => (
-                      <WorkOrderCard key={order.id} workOrder={order} />
+                      <div key={order.id} onClick={() => { setSelectedWorkOrder(order); setShowEditDialog(true); }}>
+                        <WorkOrderCard workOrder={order} />
+                      </div>
                     ))}
                   </>
                 ) : (
@@ -283,7 +291,9 @@ const WorkOrdersPage = () => {
               <div className="space-y-3">
                 {completedOrders.length > 0 ? (
                   completedOrders.slice(0, 5).map(order => (
-                    <WorkOrderCard key={order.id} workOrder={order} />
+                    <div key={order.id} onClick={() => { setSelectedWorkOrder(order); setShowEditDialog(true); }}>
+                      <WorkOrderCard workOrder={order} />
+                    </div>
                   ))
                 ) : (
                   <div className="bg-white p-4 rounded-lg border border-neutral-medium text-center">
@@ -312,7 +322,9 @@ const WorkOrdersPage = () => {
               <div className="space-y-3">
                 {urgentOrders.length > 0 ? (
                   urgentOrders.map(order => (
-                    <WorkOrderCard key={order.id} workOrder={order} />
+                    <div key={order.id} onClick={() => { setSelectedWorkOrder(order); setShowEditDialog(true); }}>
+                      <WorkOrderCard workOrder={order} />
+                    </div>
                   ))
                 ) : (
                   <div className="bg-white p-4 rounded-lg border border-neutral-medium text-center">
@@ -331,7 +343,9 @@ const WorkOrdersPage = () => {
               <div className="space-y-3">
                 {highPriorityOrders.length > 0 ? (
                   highPriorityOrders.map(order => (
-                    <WorkOrderCard key={order.id} workOrder={order} />
+                    <div key={order.id} onClick={() => { setSelectedWorkOrder(order); setShowEditDialog(true); }}>
+                      <WorkOrderCard workOrder={order} />
+                    </div>
                   ))
                 ) : (
                   <div className="bg-white p-4 rounded-lg border border-neutral-medium text-center">
@@ -350,7 +364,9 @@ const WorkOrdersPage = () => {
               <div className="space-y-3">
                 {mediumPriorityOrders.length > 0 ? (
                   mediumPriorityOrders.map(order => (
-                    <WorkOrderCard key={order.id} workOrder={order} />
+                    <div key={order.id} onClick={() => { setSelectedWorkOrder(order); setShowEditDialog(true); }}>
+                      <WorkOrderCard workOrder={order} />
+                    </div>
                   ))
                 ) : (
                   <div className="bg-white p-4 rounded-lg border border-neutral-medium text-center">
@@ -369,7 +385,9 @@ const WorkOrdersPage = () => {
               <div className="space-y-3">
                 {lowPriorityOrders.length > 0 ? (
                   lowPriorityOrders.map(order => (
-                    <WorkOrderCard key={order.id} workOrder={order} />
+                    <div key={order.id} onClick={() => { setSelectedWorkOrder(order); setShowEditDialog(true); }}>
+                      <WorkOrderCard workOrder={order} />
+                    </div>
                   ))
                 ) : (
                   <div className="bg-white p-4 rounded-lg border border-neutral-medium text-center">
@@ -388,6 +406,19 @@ const WorkOrdersPage = () => {
         onOpenChange={setShowAddDialog}
         onSave={() => setShowAddDialog(false)}
       />
+
+      {/* Edit Work Order Dialog */}
+      {selectedWorkOrder && (
+        <WorkOrderForm 
+          open={showEditDialog}
+          onOpenChange={setShowEditDialog}
+          workOrder={selectedWorkOrder}
+          onSave={() => {
+            setShowEditDialog(false);
+            setSelectedWorkOrder(null);
+          }}
+        />
+      )}
     </div>
   );
 };
