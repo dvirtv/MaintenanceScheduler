@@ -56,21 +56,31 @@ export const equipment = pgTable("equipment", {
   nextMaintenanceDate: text("next_maintenance_date"),
   lastMaintenanceDate: text("last_maintenance_date"),
   lastMaintenanceStatus: text("last_maintenance_status"),
+  sapLastSyncDate: text("sap_last_sync_date"),
+  sapSyncStatus: text("sap_sync_status"),
 });
 
 // Work orders table
 export const workOrders = pgTable("work_orders", {
   id: serial("id").primaryKey(),
+  workOrderId: text("work_order_id"), // SAP work order ID
   title: text("title").notNull(),
   description: text("description").notNull(),
   equipmentId: integer("equipment_id").notNull(),
   priority: text("priority").notNull(),
   status: text("status").notNull(),
+  type: text("type"), // Type of work order (maintenance, repair, etc.)
   assignedTo: integer("assigned_to"),
-  createdAt: text("created_at").notNull(),
-  scheduledFor: text("scheduled_for"),
-  completedAt: text("completed_at"),
+  createdDate: text("created_date").notNull(),
+  dueDate: text("due_date"), // When the work should be completed by
+  completionDate: text("completion_date"),
   notes: text("notes"),
+  estimatedHours: integer("estimated_hours"),
+  actualHours: integer("actual_hours"),
+  location: text("location"),
+  parts: jsonb("parts").default('[]'),
+  sapLastSyncDate: text("sap_last_sync_date"),
+  sapSyncStatus: text("sap_sync_status"),
 });
 
 // Maintenance staff table

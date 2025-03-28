@@ -128,6 +128,8 @@ export class MemStorage implements IStorage {
       nextMaintenanceDate: "2023-07-25",
       lastMaintenanceDate: "2023-05-01",
       lastMaintenanceStatus: "הושלמה",
+      sapLastSyncDate: null,
+      sapSyncStatus: null,
     };
     
     const equip2: Equipment = {
@@ -149,6 +151,8 @@ export class MemStorage implements IStorage {
       nextMaintenanceDate: "2023-06-10",
       lastMaintenanceDate: "2023-03-15",
       lastMaintenanceStatus: "הושלמה",
+      sapLastSyncDate: null,
+      sapSyncStatus: null,
     };
     
     const equip3: Equipment = {
@@ -170,6 +174,8 @@ export class MemStorage implements IStorage {
       nextMaintenanceDate: "2023-08-30",
       lastMaintenanceDate: "2023-06-05",
       lastMaintenanceStatus: "לא הושלמה",
+      sapLastSyncDate: null,
+      sapSyncStatus: null,
     };
     
     const equip4: Equipment = {
@@ -191,6 +197,8 @@ export class MemStorage implements IStorage {
       nextMaintenanceDate: "2023-10-10",
       lastMaintenanceDate: "2023-04-12",
       lastMaintenanceStatus: "הושלמה",
+      sapLastSyncDate: null,
+      sapSyncStatus: null,
     };
     
     const equip5: Equipment = {
@@ -212,6 +220,8 @@ export class MemStorage implements IStorage {
       nextMaintenanceDate: "2023-08-18",
       lastMaintenanceDate: "2023-02-20",
       lastMaintenanceStatus: "הושלמה",
+      sapLastSyncDate: null,
+      sapSyncStatus: null,
     };
     
     const equip6: Equipment = {
@@ -234,6 +244,8 @@ export class MemStorage implements IStorage {
       nextMaintenanceDate: "2023-07-02",
       lastMaintenanceDate: "2023-01-05",
       lastMaintenanceStatus: "הושלמה",
+      sapLastSyncDate: null,
+      sapSyncStatus: null,
     };
     
     this.equipment.set(equip1.id, equip1);
@@ -252,10 +264,18 @@ export class MemStorage implements IStorage {
       priority: "בינונית",
       status: "פתוחה",
       assignedTo: staff2.id,
-      createdAt: "2023-06-10",
-      scheduledFor: "2023-06-15",
-      completedAt: null,
+      createdDate: "2023-06-10",
+      dueDate: "2023-06-15",
+      completionDate: null,
       notes: "",
+      location: null,
+      type: null,
+      workOrderId: null,
+      sapLastSyncDate: null,
+      sapSyncStatus: null,
+      parts: null,
+      estimatedHours: null,
+      actualHours: null,
     };
     
     const wo2: WorkOrder = {
@@ -266,10 +286,18 @@ export class MemStorage implements IStorage {
       priority: "גבוהה",
       status: "בטיפול",
       assignedTo: staff3.id,
-      createdAt: "2023-06-02",
-      scheduledFor: "2023-06-05",
-      completedAt: null,
+      createdDate: "2023-06-02",
+      dueDate: "2023-06-05",
+      completionDate: null,
       notes: "הוזמנו חלקי חילוף",
+      location: null,
+      type: null,
+      workOrderId: null,
+      sapLastSyncDate: null,
+      sapSyncStatus: null,
+      parts: null,
+      estimatedHours: null,
+      actualHours: null,
     };
     
     const wo3: WorkOrder = {
@@ -280,10 +308,18 @@ export class MemStorage implements IStorage {
       priority: "דחופה",
       status: "ממתינה לחלקים",
       assignedTo: staff4.id,
-      createdAt: "2023-05-28",
-      scheduledFor: "2023-05-30",
-      completedAt: null,
+      createdDate: "2023-05-28",
+      dueDate: "2023-05-30",
+      completionDate: null,
       notes: "הוזמן טכנאי מומחה מהיצרן",
+      location: null,
+      type: null,
+      workOrderId: null,
+      sapLastSyncDate: null,
+      sapSyncStatus: null,
+      parts: null,
+      estimatedHours: null,
+      actualHours: null,
     };
     
     const wo4: WorkOrder = {
@@ -294,10 +330,18 @@ export class MemStorage implements IStorage {
       priority: "נמוכה",
       status: "פתוחה",
       assignedTo: staff2.id,
-      createdAt: "2023-06-01",
-      scheduledFor: "2023-06-20",
-      completedAt: null,
+      createdDate: "2023-06-01",
+      dueDate: "2023-06-20",
+      completionDate: null,
       notes: "",
+      location: null,
+      type: null,
+      workOrderId: null,
+      sapLastSyncDate: null,
+      sapSyncStatus: null,
+      parts: null,
+      estimatedHours: null,
+      actualHours: null,
     };
     
     const wo5: WorkOrder = {
@@ -308,10 +352,18 @@ export class MemStorage implements IStorage {
       priority: "בינונית",
       status: "פתוחה",
       assignedTo: staff1.id,
-      createdAt: "2023-06-08",
-      scheduledFor: "2023-06-12",
-      completedAt: null,
+      createdDate: "2023-06-08",
+      dueDate: "2023-06-12",
+      completionDate: null,
       notes: "",
+      location: null,
+      type: null,
+      workOrderId: null,
+      sapLastSyncDate: null,
+      sapSyncStatus: null,
+      parts: null,
+      estimatedHours: null,
+      actualHours: null,
     };
     
     this.workOrders.set(wo1.id, wo1);

@@ -8,6 +8,7 @@ import {
   insertMaintenanceHistorySchema 
 } from "@shared/schema";
 import { z } from "zod";
+import * as sapService from "./sap";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Equipment routes
@@ -294,6 +295,128 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: "Invalid maintenance history data", errors: error.errors });
       }
       res.status(500).json({ message: "Error creating maintenance history", error });
+    }
+  });
+
+  // SAP Integration routes
+  app.get("/api/sap/equipment", async (_req: Request, res: Response) => {
+    try {
+      const sapEquipment = await sapService.getAllSapEquipment();
+      res.json(sapEquipment);
+    } catch (error) {
+      res.status(500).json({ message: "Error fetching equipment from SAP", error });
+    }
+  });
+
+  app.get("/api/sap/equipment/:id", async (req: Request, res: Response) => {
+    try {
+      const equipment = await sapService.getSapEquipmentById(req.params.id);
+      if (!equipment) {
+        return res.status(404).json({ message: "Equipment not found in SAP" });
+      }
+      res.json(equipment);
+    } catch (error) {
+      res.status(500).json({ message: "Error fetching equipment from SAP", error });
+    }
+  });
+
+  app.get("/api/sap/work-orders", async (_req: Request, res: Response) => {
+    try {
+      const workOrders = await sapService.getAllSapWorkOrders();
+      res.json(workOrders);
+    } catch (error) {
+      res.status(500).json({ message: "Error fetching work orders from SAP", error });
+    }
+  });
+
+  app.get("/api/sap/equipment/:id/work-orders", async (req: Request, res: Response) => {
+    try {
+      const workOrders = await sapService.getSapWorkOrdersByEquipment(req.params.id);
+      res.json(workOrders);
+    } catch (error) {
+      res.status(500).json({ message: "Error fetching work orders from SAP", error });
+    }
+  });
+
+  app.post("/api/sap/sync/equipment", async (_req: Request, res: Response) => {
+    try {
+      const result = await sapService.syncAllEquipment();
+      res.json({
+        message: "Equipment synchronization completed",
+        result
+      });
+    } catch (error) {
+      res.status(500).json({ message: "Error synchronizing equipment from SAP", error });
+    }
+  });
+
+  app.post("/api/sap/sync/work-orders", async (_req: Request, res: Response) => {
+    try {
+      const result = await sapService.syncAllWorkOrders();
+      res.json({
+        message: "Work orders synchronization completed",
+        result
+      });
+    } catch (error) {
+      res.status(500).json({ message: "Error synchronizing work orders from SAP", error });
+    }
+  });
+
+  app.post("/api/sap/sync/all", async (_req: Request, res: Response) => {
+    try {
+      const result = await sapService.syncAllData();
+      res.json({
+        message: "Full SAP synchronization completed",
+        result
+      });
+    } catch (error) {
+      res.status(500).json({ message: "Error during full SAP synchronization", error });
+    }
+  });
+
+  app.post("/api/sap/equipment/:id", async (req: Request, res: Response) => {
+    try {
+      const id = parseInt(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: "Invalid equipment ID" });
+      }
+      
+      const equipment = await storage.getEquipment(id);
+      if (!equipment) {
+        return res.status(404).json({ message: "Equipment not found" });
+      }
+      
+      const success = await sapService.sendEquipmentToSap(equipment);
+      if (!success) {
+        return res.status(500).json({ message: "Failed to send equipment to SAP" });
+      }
+      
+      res.json({ success: true, message: "Equipment sent to SAP successfully" });
+    } catch (error) {
+      res.status(500).json({ message: "Error sending equipment to SAP", error });
+    }
+  });
+
+  app.post("/api/sap/work-orders/:id", async (req: Request, res: Response) => {
+    try {
+      const id = parseInt(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: "Invalid work order ID" });
+      }
+      
+      const workOrder = await storage.getWorkOrder(id);
+      if (!workOrder) {
+        return res.status(404).json({ message: "Work order not found" });
+      }
+      
+      const success = await sapService.sendWorkOrderToSap(workOrder);
+      if (!success) {
+        return res.status(500).json({ message: "Failed to send work order to SAP" });
+      }
+      
+      res.json({ success: true, message: "Work order sent to SAP successfully" });
+    } catch (error) {
+      res.status(500).json({ message: "Error sending work order to SAP", error });
     }
   });
 
