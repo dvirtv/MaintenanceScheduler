@@ -17,12 +17,16 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Dashboard} />
-      <Route path="/equipment" component={Equipment} />
-      <Route path="/equipment/:id" component={EquipmentDetails} />
+      {/* דרכים סטטיות ראשונות */}
+      <Route path="/equipment/new" component={Equipment} />
       <Route path="/schedule" component={Schedule} />
       <Route path="/work-orders" component={WorkOrders} />
       <Route path="/staff" component={Staff} />
       <Route path="/reports" component={Reports} />
+      <Route path="/equipment" component={Equipment} />
+      
+      {/* דרכים עם פרמטרים אחרונות */}
+      <Route path="/equipment/:id" component={EquipmentDetails} />
       <Route component={NotFound} />
     </Switch>
   );

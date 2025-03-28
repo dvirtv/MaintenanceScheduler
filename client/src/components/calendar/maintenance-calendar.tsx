@@ -25,7 +25,7 @@ import { formatDate, formatLongDate } from '@/lib/utils/dates';
 
 // Import styles for react-big-calendar
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import './calendar.css'; // We'll create this custom CSS file
+import './calendar.css'; // Custom CSS file for RTL and styling overrides
 
 // Setup date-fns localizer for Hebrew
 const locales = {
