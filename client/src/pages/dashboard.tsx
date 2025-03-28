@@ -213,7 +213,7 @@ const Dashboard: React.FC = () => {
       
       {/* Quick Actions */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Link href="/work-orders/new">
+        <Link href="/work-orders">
           <Card className="hover:bg-neutral-light cursor-pointer transition-colors duration-200">
             <CardContent className="pt-6 flex flex-col items-center">
               <div className="bg-primary rounded-full p-3 text-white mb-2">

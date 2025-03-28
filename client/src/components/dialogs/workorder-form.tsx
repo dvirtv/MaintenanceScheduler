@@ -280,8 +280,8 @@ const WorkOrderForm: React.FC<WorkOrderFormProps> = ({
                   <FormItem>
                     <FormLabel>הקצה לטכנאי</FormLabel>
                     <Select
-                      onValueChange={(value) => field.onChange(parseInt(value))}
-                      defaultValue={field.value?.toString()}
+                      onValueChange={(value) => field.onChange(value === "0" ? null : parseInt(value))}
+                      defaultValue={field.value?.toString() || "0"}
                     >
                       <FormControl>
                         <SelectTrigger>
@@ -289,7 +289,7 @@ const WorkOrderForm: React.FC<WorkOrderFormProps> = ({
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="">לא הוקצה</SelectItem>
+                        <SelectItem value="0">לא הוקצה</SelectItem>
                         {isLoadingStaff ? (
                           <div className="text-center p-2">
                             <div className="animate-spin h-4 w-4 border-2 border-primary border-t-transparent rounded-full mx-auto"></div>
