@@ -53,6 +53,8 @@ const workOrderSchema = z.object({
   }),
   assignedTo: z.number().optional(),
   dueDate: z.string().optional(),
+  estimatedHours: z.number().min(0).optional(),
+  actualHours: z.number().min(0).optional(),
   notes: z.string().optional(),
 });
 
@@ -88,6 +90,8 @@ const WorkOrderForm: React.FC<WorkOrderFormProps> = ({
           equipmentId: workOrder.equipmentId,
           assignedTo: workOrder.assignedTo || undefined,
           dueDate: workOrder.dueDate || '',
+          estimatedHours: workOrder.estimatedHours || undefined,
+          actualHours: workOrder.actualHours || undefined,
           notes: workOrder.notes || '',
         }
       : {
@@ -97,6 +101,8 @@ const WorkOrderForm: React.FC<WorkOrderFormProps> = ({
           priority: 'בינונית',
           status: 'פתוחה',
           dueDate: '',
+          estimatedHours: undefined,
+          actualHours: undefined,
           notes: '',
         },
   });
@@ -130,7 +136,7 @@ const WorkOrderForm: React.FC<WorkOrderFormProps> = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-lg">
+      <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-xl">
             {isEditing ? 'עריכת הזמנת עבודה' : 'הזמנת עבודה חדשה'}
@@ -324,6 +330,58 @@ const WorkOrderForm: React.FC<WorkOrderFormProps> = ({
                 </FormItem>
               )}
             />
+
+            <div className="grid grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="estimatedHours"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>שעות עבודה מוערכות</FormLabel>
+                    <FormControl>
+                      <Input 
+                        type="number" 
+                        min="0"
+                        step="0.5"
+                        placeholder="שעות עבודה מוערכות" 
+                        {...field}
+                        value={field.value === undefined ? '' : field.value}
+                        onChange={(e) => {
+                          const value = e.target.value === '' ? undefined : parseFloat(e.target.value);
+                          field.onChange(value);
+                        }}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="actualHours"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>שעות עבודה בפועל</FormLabel>
+                    <FormControl>
+                      <Input 
+                        type="number" 
+                        min="0"
+                        step="0.5"
+                        placeholder="שעות עבודה בפועל"
+                        {...field}
+                        value={field.value === undefined ? '' : field.value}
+                        onChange={(e) => {
+                          const value = e.target.value === '' ? undefined : parseFloat(e.target.value);
+                          field.onChange(value);
+                        }}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
             <FormField
               control={form.control}
