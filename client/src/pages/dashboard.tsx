@@ -40,122 +40,140 @@ const Dashboard: React.FC = () => {
     <div className="space-y-6">
       {/* Stats Cards Row */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card>
-          <CardContent className="pt-6">
-            <div className="flex flex-col items-center">
-              <span className="text-3xl font-bold text-primary">{equipmentStats.total}</span>
-              <span className="text-sm text-neutral-dark">סך כל הציוד</span>
-            </div>
-          </CardContent>
-        </Card>
+        <Link href="/equipment">
+          <Card className="hover:bg-neutral-light cursor-pointer transition-colors duration-200">
+            <CardContent className="pt-6">
+              <div className="flex flex-col items-center">
+                <span className="text-3xl font-bold text-primary">{equipmentStats.total}</span>
+                <span className="text-sm text-neutral-dark">סך כל הציוד</span>
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
         
-        <Card>
-          <CardContent className="pt-6">
-            <div className="flex flex-col items-center">
-              <span className="text-3xl font-bold text-success">{equipmentStats.active}</span>
-              <span className="text-sm text-neutral-dark">ציוד פעיל</span>
-            </div>
-          </CardContent>
-        </Card>
+        <Link href="/equipment?status=פעיל">
+          <Card className="hover:bg-neutral-light cursor-pointer transition-colors duration-200">
+            <CardContent className="pt-6">
+              <div className="flex flex-col items-center">
+                <span className="text-3xl font-bold text-success">{equipmentStats.active}</span>
+                <span className="text-sm text-neutral-dark">ציוד פעיל</span>
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
         
-        <Card>
-          <CardContent className="pt-6">
-            <div className="flex flex-col items-center">
-              <span className="text-3xl font-bold text-warning">{equipmentStats.needsInspection}</span>
-              <span className="text-sm text-neutral-dark">דורש בדיקה</span>
-            </div>
-          </CardContent>
-        </Card>
+        <Link href="/equipment?status=דורש בדיקה">
+          <Card className="hover:bg-neutral-light cursor-pointer transition-colors duration-200">
+            <CardContent className="pt-6">
+              <div className="flex flex-col items-center">
+                <span className="text-3xl font-bold text-warning">{equipmentStats.needsInspection}</span>
+                <span className="text-sm text-neutral-dark">דורש בדיקה</span>
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
         
-        <Card>
-          <CardContent className="pt-6">
-            <div className="flex flex-col items-center">
-              <span className="text-3xl font-bold text-danger">{equipmentStats.inactive}</span>
-              <span className="text-sm text-neutral-dark">לא פעיל</span>
-            </div>
-          </CardContent>
-        </Card>
+        <Link href="/equipment?status=לא פעיל">
+          <Card className="hover:bg-neutral-light cursor-pointer transition-colors duration-200">
+            <CardContent className="pt-6">
+              <div className="flex flex-col items-center">
+                <span className="text-3xl font-bold text-danger">{equipmentStats.inactive}</span>
+                <span className="text-sm text-neutral-dark">לא פעיל</span>
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
       </div>
       
       {/* Charts Row */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Work Orders by Status */}
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-lg">סטטוס הזמנות עבודה</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="h-64">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart
-                  data={workOrdersByStatus}
-                  layout="vertical"
-                  margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" horizontal={false} />
-                  <XAxis type="number" />
-                  <YAxis type="category" dataKey="name" />
-                  <Tooltip 
-                    formatter={(value) => [`${value} הזמנות`, '']}
-                    labelFormatter={(label) => `סטטוס: ${label}`}
-                  />
-                  <Bar dataKey="value" fill="#0F4C81" barSize={20} radius={[0, 4, 4, 0]} />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </CardContent>
+        <Card className="cursor-pointer hover:bg-neutral-light transition-colors duration-200">
+          <Link href="/work-orders">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-lg flex justify-between items-center">
+                <span>סטטוס הזמנות עבודה</span>
+                <ArrowRight size={16} className="text-primary" />
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="h-64">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart
+                    data={workOrdersByStatus}
+                    layout="vertical"
+                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" horizontal={false} />
+                    <XAxis type="number" />
+                    <YAxis type="category" dataKey="name" />
+                    <Tooltip 
+                      formatter={(value) => [`${value} הזמנות`, '']}
+                      labelFormatter={(label) => `סטטוס: ${label}`}
+                    />
+                    <Bar dataKey="value" fill="#0F4C81" barSize={20} radius={[0, 4, 4, 0]} />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </CardContent>
+          </Link>
         </Card>
         
         {/* Work Orders by Priority */}
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-lg">הזמנות עבודה לפי דחיפות</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="h-64">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie
-                    data={workOrdersByPriority}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={60}
-                    outerRadius={80}
-                    fill="#8884d8"
-                    paddingAngle={5}
-                    dataKey="value"
-                    label={({ cx, cy, midAngle, innerRadius, outerRadius, percent }) => {
-                      const radius = innerRadius + (outerRadius - innerRadius) * 1.3;
-                      const x = cx + radius * Math.cos(-midAngle * Math.PI / 180);
-                      const y = cy + radius * Math.sin(-midAngle * Math.PI / 180);
-                      return (
-                        <text 
-                          x={x} 
-                          y={y} 
-                          textAnchor={x > cx ? 'start' : 'end'} 
-                          dominantBaseline="central"
-                          className="text-xs"
-                        >
-                          {`${(percent * 100).toFixed(0)}%`}
-                        </text>
-                      );
-                    }}
-                  >
-                    {workOrdersByPriority.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                  </Pie>
-                  <Legend 
-                    verticalAlign="bottom" 
-                    height={36}
-                    iconType="circle"
-                    formatter={(value) => <span className="text-sm">{value}</span>}
-                  />
-                  <Tooltip formatter={(value) => [`${value} הזמנות`, '']} />
-                </PieChart>
-              </ResponsiveContainer>
-            </div>
-          </CardContent>
+        <Card className="cursor-pointer hover:bg-neutral-light transition-colors duration-200">
+          <Link href="/work-orders">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-lg flex justify-between items-center">
+                <span>הזמנות עבודה לפי דחיפות</span>
+                <ArrowRight size={16} className="text-primary" />
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="h-64">
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={workOrdersByPriority}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={60}
+                      outerRadius={80}
+                      fill="#8884d8"
+                      paddingAngle={5}
+                      dataKey="value"
+                      label={({ cx, cy, midAngle, innerRadius, outerRadius, percent }) => {
+                        const radius = innerRadius + (outerRadius - innerRadius) * 1.3;
+                        const x = cx + radius * Math.cos(-midAngle * Math.PI / 180);
+                        const y = cy + radius * Math.sin(-midAngle * Math.PI / 180);
+                        return (
+                          <text 
+                            x={x} 
+                            y={y} 
+                            textAnchor={x > cx ? 'start' : 'end'} 
+                            dominantBaseline="central"
+                            className="text-xs"
+                          >
+                            {`${(percent * 100).toFixed(0)}%`}
+                          </text>
+                        );
+                      }}
+                    >
+                      {workOrdersByPriority.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <Legend 
+                      verticalAlign="bottom" 
+                      height={36}
+                      iconType="circle"
+                      formatter={(value) => <span className="text-sm">{value}</span>}
+                    />
+                    <Tooltip formatter={(value) => [`${value} הזמנות`, '']} />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+            </CardContent>
+          </Link>
         </Card>
       </div>
       
@@ -176,35 +194,43 @@ const Dashboard: React.FC = () => {
               <p className="text-center text-muted-foreground py-4">אין משימות תחזוקה מתוכננות בקרוב</p>
             ) : (
               upcomingMaintenance.map((maintenance) => (
-                <div 
-                  key={maintenance.id} 
-                  className="bg-neutral-light p-3 rounded-lg border border-neutral-medium border-opacity-50 flex justify-between items-center"
+                <Link 
+                  href={`/equipment/${maintenance.id}`}
+                  key={maintenance.id}
                 >
-                  <div className="flex items-start gap-3">
-                    <div className={`p-2 rounded-full ${maintenance.daysUntil <= 3 ? 'bg-danger text-white' : maintenance.daysUntil <= 7 ? 'bg-warning text-white' : 'bg-primary text-white'}`}>
-                      <Clock size={18} />
+                  <div 
+                    className="bg-neutral-light p-3 rounded-lg border border-neutral-medium border-opacity-50 flex justify-between items-center cursor-pointer hover:bg-neutral-medium hover:border-neutral-dark transition-colors duration-200"
+                  >
+                    <div className="flex items-start gap-3">
+                      <div className={`p-2 rounded-full ${maintenance.daysUntil <= 3 ? 'bg-danger text-white' : maintenance.daysUntil <= 7 ? 'bg-warning text-white' : 'bg-primary text-white'}`}>
+                        <Clock size={18} />
+                      </div>
+                      <div>
+                        <div className="font-medium">{maintenance.equipmentName}</div>
+                        <div className="text-sm text-neutral-dark">{maintenance.location}</div>
+                        <div className="text-sm mt-1">
+                          {maintenance.maintenanceType || "תחזוקה שוטפת"}
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <div className="font-medium">{maintenance.equipmentName}</div>
-                      <div className="text-sm text-neutral-dark">{maintenance.location}</div>
-                      <div className="text-sm mt-1">
-                        {maintenance.maintenanceType || "תחזוקה שוטפת"}
+                    <div className="flex flex-col items-end">
+                      <div className={`text-sm font-medium ${maintenance.daysUntil <= 3 ? 'text-danger' : maintenance.daysUntil <= 7 ? 'text-warning' : 'text-primary'}`}>
+                        {maintenance.scheduledDate}
+                      </div>
+                      <div className="text-xs text-neutral-dark mt-1">
+                        {maintenance.daysUntil === 0 
+                          ? 'היום'
+                          : maintenance.daysUntil === 1
+                          ? 'מחר'
+                          : `בעוד ${maintenance.daysUntil} ימים`}
+                      </div>
+                      <div className="text-xs text-primary mt-1 flex items-center">
+                        פרטים נוספים
+                        <ArrowRight size={12} className="mr-1" />
                       </div>
                     </div>
                   </div>
-                  <div className="flex flex-col items-end">
-                    <div className={`text-sm font-medium ${maintenance.daysUntil <= 3 ? 'text-danger' : maintenance.daysUntil <= 7 ? 'text-warning' : 'text-primary'}`}>
-                      {maintenance.scheduledDate}
-                    </div>
-                    <div className="text-xs text-neutral-dark mt-1">
-                      {maintenance.daysUntil === 0 
-                        ? 'היום'
-                        : maintenance.daysUntil === 1
-                        ? 'מחר'
-                        : `בעוד ${maintenance.daysUntil} ימים`}
-                    </div>
-                  </div>
-                </div>
+                </Link>
               ))
             )}
           </div>
