@@ -52,7 +52,7 @@ const workOrderSchema = z.object({
     required_error: "יש לבחור סטטוס",
   }),
   assignedTo: z.number().optional(),
-  scheduledFor: z.string().optional(),
+  dueDate: z.string().optional(),
   notes: z.string().optional(),
 });
 
@@ -87,7 +87,7 @@ const WorkOrderForm: React.FC<WorkOrderFormProps> = ({
           ...workOrder,
           equipmentId: workOrder.equipmentId,
           assignedTo: workOrder.assignedTo || undefined,
-          scheduledFor: workOrder.scheduledFor || '',
+          dueDate: workOrder.dueDate || '',
           notes: workOrder.notes || '',
         }
       : {
@@ -96,7 +96,7 @@ const WorkOrderForm: React.FC<WorkOrderFormProps> = ({
           equipmentId: equipment ? equipment.id : undefined,
           priority: 'בינונית',
           status: 'פתוחה',
-          scheduledFor: '',
+          dueDate: '',
           notes: '',
         },
   });
@@ -116,7 +116,7 @@ const WorkOrderForm: React.FC<WorkOrderFormProps> = ({
       createWorkOrder(
         { 
           ...values, 
-          createdAt: new Date().toISOString().split('T')[0] 
+          createdDate: new Date().toISOString().split('T')[0] 
         },
         {
           onSuccess: (newWorkOrder) => {
@@ -313,7 +313,7 @@ const WorkOrderForm: React.FC<WorkOrderFormProps> = ({
 
             <FormField
               control={form.control}
-              name="scheduledFor"
+              name="dueDate"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>תאריך לביצוע</FormLabel>
