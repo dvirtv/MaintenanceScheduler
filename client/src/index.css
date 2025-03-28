@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: 'Rubik', sans-serif;
+    direction: rtl;
+  }
+
+  :root {
+    --background: 210 40% 96.1%;
+    --foreground: 214 37% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 214 37% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 214 37% 15%;
+
+    --primary: 218 48% 28%;
+    --primary-foreground: 0 0% 100%;
+
+    --primary-light: 210 47% 44%;
+    --primary-dark: 215 55% 21%;
+
+    --secondary: 31 94% 62%;
+    --secondary-foreground: 0 0% 100%;
+
+    --secondary-light: 30 93% 76%;
+    --secondary-dark: 28 80% 50%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 214 15% 40%;
+
+    --success: 145 63% 42%;
+    --success-light: 150 59% 66%;
+    --success-dark: 153 61% 36%;
+
+    --warning: 43 96% 62%;
+    --danger: 0 84% 63%;
+
+    --neutral-light: 210 40% 96.1%;
+    --neutral-medium: 210 20% 92%;
+    --neutral-dark: 220 24% 29%;
+
+    --sidebar-background: var(--primary);
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: var(--primary-light);
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 100%;
+    --sidebar-accent-foreground: var(--primary);
+    --sidebar-border: var(--primary-light);
+    --sidebar-ring: var(--primary-light);
+
+    --accent: 210 40% 90%;
+    --accent-foreground: 214 37% 15%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 214 32% 91%;
+
+    --radius: 0.5rem;
+  }
+}
+
+@layer components {
+  .sidebar-item {
+    @apply relative;
+  }
+  
+  .sidebar-item:hover .sidebar-tooltip {
+    @apply block;
+  }
+  
+  @media (min-width: 1024px) {
+    .sidebar-tooltip {
+      @apply hidden !important;
+    }
+  }
+}

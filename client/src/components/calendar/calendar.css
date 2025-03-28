@@ -1,0 +1,117 @@
+/* Custom styling for the maintenance calendar */
+
+/* RTL support for the calendar */
+.rtl-calendar .rbc-calendar {
+  direction: rtl;
+}
+
+/* Override button text alignment */
+.rtl-calendar .rbc-btn-group button {
+  direction: rtl;
+}
+
+/* Fix header alignment */
+.rtl-calendar .rbc-header {
+  text-align: right;
+}
+
+/* Event styling */
+.rtl-calendar .rbc-event {
+  padding: 2px 6px;
+  font-size: 0.875rem;
+  border-radius: 4px;
+}
+
+/* Today styling */
+.rtl-calendar .rbc-today {
+  background-color: rgba(15, 76, 129, 0.1);
+}
+
+/* Active time styling */
+.rtl-calendar .rbc-current-time-indicator {
+  background-color: #F2994A;
+  height: 2px;
+}
+
+/* Adjusting toolbar */
+.rtl-calendar .rbc-toolbar {
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.rtl-calendar .rbc-toolbar button {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
+  border: 1px solid #d1d5db;
+  color: #3C4858;
+  font-size: 0.875rem;
+}
+
+.rtl-calendar .rbc-toolbar button.rbc-active {
+  background-color: #0F4C81;
+  color: white;
+  border-color: #0F4C81;
+}
+
+/* Adjust off-range dates */
+.rtl-calendar .rbc-off-range-bg {
+  background-color: #f8fafc;
+}
+
+/* Fix agenda view */
+.rtl-calendar .rbc-agenda-view table.rbc-agenda-table tbody > tr > td {
+  text-align: right;
+}
+
+.rtl-calendar .rbc-agenda-view table.rbc-agenda-table thead > tr > th {
+  text-align: right;
+}
+
+/* Fix time grid header */
+.rtl-calendar .rbc-time-header-content {
+  text-align: right;
+}
+
+/* Fix time view */
+.rtl-calendar .rbc-label {
+  text-align: right;
+  padding-right: 5px;
+}
+
+/* Fix month view */
+.rtl-calendar .rbc-month-view .rbc-month-row .rbc-row-content {
+  text-align: right;
+}
+
+/* Override time column direction */
+.rtl-calendar .rbc-time-view .rbc-time-column {
+  direction: ltr;
+}
+
+/* Fix agenda view */
+.rtl-calendar .rbc-agenda-view .rbc-agenda-empty {
+  text-align: center;
+  padding: 2rem;
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+/* Fix button groups */
+.rtl-calendar .rbc-btn-group > button:first-child:not(:last-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+
+.rtl-calendar .rbc-btn-group > button:last-child:not(:first-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+
+/* Fix event positioning */
+.rtl-calendar .rbc-event-content {
+  text-align: right;
+}
