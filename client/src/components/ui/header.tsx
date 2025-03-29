@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useLocation } from "wouter";
+import { useLocation, Link } from "wouter";
 import { Search, Bell } from "lucide-react";
+import logoPath from "@/assets/logo.svg";
 
 interface HeaderProps {
   title?: string;
@@ -36,6 +37,15 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
     <header className="bg-white shadow-sm z-10">
       <div className="flex items-center justify-between p-4">
         <div className="flex items-center">
+          <div className="hidden md:flex items-center ml-4">
+            <Link href="/">
+              <img 
+                src={logoPath} 
+                alt="מערכת אחזקה - מפעלי ים המלח" 
+                className="h-8 w-8 object-contain" 
+              />
+            </Link>
+          </div>
           <h2 className="text-xl font-semibold text-neutral-dark">{getPageTitle()}</h2>
         </div>
         

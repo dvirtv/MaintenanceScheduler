@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="50" viewBox="0 0 200 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- מעגל כחול למשמאל -->
+  <circle cx="25" cy="25" r="20" fill="#0F4C81"/>
+  
+  <!-- צורת גלגל שיניים -->
+  <path d="M25 5L28 8.5L32 7L33.5 11L38 12L38 16.5L42.5 19L40 23L42.5 27L38 29.5L38 34L33.5 35L32 39L28 37.5L25 41L22 37.5L18 39L16.5 35L12 34L12 29.5L7.5 27L10 23L7.5 19L12 16.5L12 12L16.5 11L18 7L22 8.5L25 5Z" fill="#0F4C81" stroke="white" stroke-width="1.5"/>
+  
+  <!-- נקודה מרכזית -->
+  <circle cx="25" cy="25" r="5" fill="white"/>
+  
+  <!-- טקסט שם החברה -->
+  <text x="60" y="25" font-family="Arial" font-size="18" font-weight="bold" fill="#0F4C81">מערכת אחזקה</text>
+  <text x="60" y="42" font-family="Arial" font-size="14" fill="#3C4858">מפעלי ים המלח</text>
+</svg>

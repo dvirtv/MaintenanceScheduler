@@ -8,6 +8,7 @@ import {
   BarChart3,
   ChevronDown
 } from "lucide-react";
+import logoPath from "@/assets/logo.svg";
 
 const Sidebar = () => {
   const [location] = useLocation();
@@ -20,15 +21,22 @@ const Sidebar = () => {
     <div className="flex flex-col bg-primary text-white transition-all duration-300 lg:w-64 w-16 flex-shrink-0 shadow-lg">
       {/* Logo Area */}
       <div className="p-4 flex items-center justify-center lg:justify-start">
-        <div className="text-4xl lg:text-3xl">
-          <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M22 8.27V4.31C22 2.5 21.5 2 19.69 2H15.73C13.92 2 13.42 2.5 13.42 4.31V8.27C13.42 10.08 13.92 10.58 15.73 10.58H19.69C21.5 10.58 22 10.08 22 8.27Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M10.58 8.52V3.94C10.58 2.64 10.08 2.14 8.78 2.14H4.21C2.91 2.14 2.41 2.64 2.41 3.94V8.52C2.41 9.82 2.91 10.32 4.21 10.32H8.78C10.08 10.32 10.58 9.82 10.58 8.52Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M10.58 19.78V15.21C10.58 13.91 10.08 13.41 8.78 13.41H4.21C2.91 13.41 2.41 13.91 2.41 15.21V19.78C2.41 21.08 2.91 21.58 4.21 21.58H8.78C10.08 21.58 10.58 21.08 10.58 19.78Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M22 19.78V15.21C22 13.91 21.5 13.41 20.2 13.41H15.63C14.33 13.41 13.83 13.91 13.83 15.21V19.78C13.83 21.08 14.33 21.58 15.63 21.58H20.2C21.5 21.58 22 21.08 22 19.78Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </div>
-        <h1 className="text-xl font-bold mr-3 hidden lg:block">אחזקת אשלג</h1>
+        <Link href="/" className="flex items-center">
+          <img 
+            src={logoPath} 
+            alt="מערכת אחזקה - מפעלי ים המלח" 
+            className="w-10 h-10 lg:w-12 lg:h-12 object-contain hidden lg:block" 
+          />
+          <img 
+            src={logoPath} 
+            alt="מערכת אחזקה - מפעלי ים המלח" 
+            className="w-8 h-8 object-contain lg:hidden" 
+          />
+          <div className="mr-2 hidden lg:block">
+            <h1 className="text-lg font-bold leading-tight">מערכת אחזקה</h1>
+            <p className="text-xs text-gray-100">מפעלי ים המלח</p>
+          </div>
+        </Link>
       </div>
       
       {/* Navigation Items */}
